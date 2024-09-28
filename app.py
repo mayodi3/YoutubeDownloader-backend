@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 from pytubefix import YouTube, Search
-lask_cors import CORS
+from flask_cors import CORS
 from flask_socketio import SocketIO, emit
 import os
 import platform
