@@ -59,12 +59,20 @@ def search_videos():
 
     videos = []
     for video in results.videos:
-        videos.append({
+        try:
+            videos.append({
             'title': video.title,
             'url': video.watch_url,
             'thumbnail': video.thumbnail_url,
             'duration': video.length
         })
+        except KeyError:
+            videos.append({
+                'title': "Unavailable due to bot detection",
+                'url': video.watch_url,
+                'thumbnail': None,
+                'duration': 'Unkown'
+            })
 
     return jsonify(videos)
 
@@ -78,7 +86,7 @@ def download_video():
     if not path:
         return jsonify({'error': 'Path is required'}), 400
 
-    yt = YouTube(url, on_progress_callback=lambda stream, chunk, bytes_remaining: on_progress(stream, chunk, bytes_remaining, url))
+    yt = YouTube(url, on_progress_callback=lambda stream, chunk, bytes_remaining: on_progress(stream, chunk, bytes_remaining, url), use_po_token=True)
     ys = yt.streams.get_highest_resolution()
     
     # Start download and emit progress updates
