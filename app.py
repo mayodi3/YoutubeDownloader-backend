@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 from pytubefix import YouTube, Search
-from flask_cors import CORS
+from f.results[:10
+lask_cors import CORS
 from flask_socketio import SocketIO, emit
 import os
 import platform
@@ -55,7 +56,8 @@ def search_videos():
     if not query:
         return jsonify({'error': 'Query is required'}), 400
 
-    results = Search(query)
+    results = Search(query).results[:10]
+
     videos = []
     for video in results.videos:
         videos.append({

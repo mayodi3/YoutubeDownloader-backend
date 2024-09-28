@@ -1,3 +1,7 @@
 Flask
+flask_cors
+flask_socketio
+python-socketio
 pytubefix
+eventlet
 gunicorn
